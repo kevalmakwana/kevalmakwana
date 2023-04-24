@@ -5,10 +5,10 @@ from mysql.connector import Error
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_HOST'] = '10.17.50.51'
+app.config['MYSQL_USER'] = 'baadalvm'
 app.config['MYSQL_PASSWORD'] = 'Keval@11'
-app.config['MYSQL_DB'] = 'new'
+app.config['MYSQL_DB'] = 'journify_db'
 
 @app.route('/')
 def index():
@@ -33,8 +33,8 @@ def upload():
         cursor = connection.cursor()
         # insert data into MySQL table
         for i, row in df.iterrows():
-            sql = 'INSERT INTO data (name, age) VALUES (%s, %s)'
-            val = (row['name'], row['age'])
+            sql = 'INSERT INTO flights_new (airline, flight_number, airline, origin, destination, day_of_week, scheduled_departure, scheduled_arrival, valid_from, valid_to) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            val = (row['airline'], row['flightNumber'], row['origin'], row['destination'], row['daysOfWeek'], row['scheduledDepartureTime'], row['scheduledArrivalTime'], row['validFrom'], row['validTo'])
             cursor.execute(sql, val)
         connection.commit()
         cursor.close()
