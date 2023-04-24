@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flight.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="{{ url_for('home') }}"><img src="{{url_for('static', filename='img/logo_final.png') }}" alt=""></a>
+            <div class="nav_links">
+                <ul>
+                    <li>
+                        <a href="{{ url_for('home') }}">
+                            <div class="nav_col">
+                                <i class="bi bi-house-door" style="font-size: 26px"></i>
+                                <h3>Home</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('flight') }}">
+                            <div class="nav_col flight">
+                                <i class="bi bi-airplane" style="font-size: 26px"></i>
+                                <h4>Flights</h4>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('train') }}">
+                            <div class="nav_col">
+                                <i class="bi bi-train-lightrail-front" style="font-size: 26px"></i>
+                                <h4>Trains</h4>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('holiday') }}">
+                            <div class="nav_col">
+                                <i class="bi bi-briefcase" style="font-size: 26px"></i>
+                                <h4>Holidays</h4>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('trip') }}">
+                            <div class="nav_col">
+                                <i class="bi bi-car-front" style="font-size: 26px"></i>
+                                <h4>Trips</h4>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="side profile">
+                <!-- <img src="images/matt_pery.jpg" class="user_pic" onclick="togglemenu()" alt=""> -->
+                <i class="bi bi-person-circle" class="user_pic" onclick="togglemenu()" style="font-size: 30px;"></i>
+                <h4>{{ username }}</h4>
+            </div>
+            <div class="sub_menu_wrap" id="submenu">
+                <div class="sub_menu">
+                    <div class="user_info">
+                        <!-- <img src="images/matt_pery.jpg" alt=""> -->
+                        <h3>{{ username }}</h3>
+                    </div>
+                    <hr>
+                    <a href="{{ url_for('user') }}" class="sub_menu_link">
+                        <img src="{{ url_for('static', filename='img/profile.png') }}" alt="">
+                        <p>View Profile</p>
+                        <span>></span>
+                    </a>
+                    <a href="#" class="sub_menu_link">
+                        <img src="{{ url_for('static', filename='img/setting.png') }}" alt="">
+                        <p>Settings and privacy</p>
+                        <span>></span>
+                    </a>
+                    <a href="#" class="sub_menu_link">
+                        <img src="{{ url_for('static', filename='img/help.png') }}" alt="">
+                        <p>Help & Support</p>
+                        <span>></span>
+                    </a>
+                    <a href="{{ url_for('signup_page')}}" class="sub_menu_link">
+                        <img src="{{ url_for('static', filename='img/Logout.png') }}" alt="">
+                        <p>Logout</p>
+                        <span>></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <form method="post" action="/flight/search">
+                <div class="input_field">
+                    <div class="location">
+                        <div class="location_col col">
+                            <label for="origin">Origin Airport</label>
+                            <input type="text" id="origin-search-box" name="origin" autocomplete="off" placeholder="Delhi">
+                            <div id="origin-search-results" class="search-results-container"></div>
+                            
+                        </div>                        
+                        <div class="location_col col">
+                            <label for="destination">Destination Airport</label>
+                            <input type="text" id="destination-search-box" name="destination" autocomplete="off" placeholder="Mumbai">
+                            <div id="destination-search-results" class="search-results-container"></div>
+                            
+                        </div> 
+                    </div>
+                    <div class="date">
+                        <div class="date_col col">
+                            <!-- <h2>Departure Date</h2> -->
+                            <label for="dep_date">Departure Date</label>
+                            <input type="date" name="dep_date" id="dep_date" required>
+                            
+                        </div>
+                        <div class="date_col col">
+                            <!-- <h2>return Date</h2> -->
+                            <label for="ret_date">Return Date</label>
+                            <input type="date" name="ret_date" id="ret_date">
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="class">
+                        <!-- <h2>Traveller and Class</h2> -->
+                        <label for="Class">Class</label>
+                        <Select id="Class">
+                            <option value="Class">Select Class</option>
+                            <option value="Economy Class">Economy Class</option>
+                            <option value="Premium Economy Class">Premium Economy Class</option>
+                            <option value="Business Class">Business Class</option>
+                            <option value="First Class">First Class</option>
+                        </Select>
+
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="offer">
+                        <label for="Regular Fares">Regular Fares</label>
+                        <input type="radio" name="offer">
+                        <label for="Armed forces fares">Armed Forces Fares</label>
+                        <input type="radio" name="offer">
+                        <label for="Student fares">Student Fares</label>
+                        <input type="radio" name="offer">
+                        <label for="Senior Citizen Fares">Senior Citizen Fares</label>
+                        <input type="radio" name="offer">
+                        <label for="Doctors & Nurses Fares">Doctors & Nurses Fares</label>
+                    </div>
+                </div>
+                <div class="btn_field">
+                    <div class="search">
+                        <input type="submit" value="Search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="extra">
+        <div class="info">
+            <p>
+                Travel Guide: Get latest updates on airlines and international guidelines,
+                          state-wise quarantine rules, travel checklist, web-checkins, etc.
+            </p>
+            <p>
+                Important Info: To cancel/claim refund or reschedule/modify
+                              your booking. Click Here.  
+            </p>
+        </div>
+    </section>
+
+    <!-- <section class="book">
+        <div class="img">
+            <div class="top">
+
+            </div>
+            <div class="location">
+
+            </div>
+            <div class="date">
+
+            </div>
+            <div class="class">
+
+            </div>
+            <div class="check">
+
+            </div>
+            <div class="search">
+                
+            </div>
+        </div>
+    </section> -->
+    <!-- top destinations -->
+    <!-- <section class="top_dest">
+        <h1>Explore Top Destinations</h1>
+
+        <div class="row">
+            <div class="dest_col">
+                <img src="images/bali_indonesia.jpg" alt="">
+                <h3>Bali, Indonesia</h3>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+            </div>
+            <div class="dest_col">
+                <img src="images/zurich_switzerland.jpg" alt="">
+                <h3>Zurich, Switzerland</h3>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+            </div>
+            <div class="dest_col">
+                <img src="images/santorini_greece.jpg" alt="">
+                <h3>Santorini, Greece</h3>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+            </div>
+            <div class="dest_col">
+                <img src="images/istanbul_turkey.jpg" alt="">
+                <h3>Istanbul, Turkey</h3>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- type of travel specialisation  -->
+    <!-- <section class="travel">
+        <h3>Travel Types</h3>
+        <div class="top_box">
+            <h2>What types of Travel Do We Specialize in ?</h2>
+        </div>
+        <div class="row">
+            <i class="bi bi-arrow-left-circle-fill"></i>
+            <div class="travel_col">
+                <img src="images/specialisation1.jpg" alt="">
+            </div>
+            <div class="travel_col">
+                <img src="images/specialisation2.jpg" alt="">
+            </div>
+            <div class="travel_col">
+                <img src="images/specialisation3.jpg" alt="">
+            </div>
+            <div class="travel_col">
+                <img src="images/specialisation4.jpg" alt="">
+            </div>
+            <i class="bi bi-arrow-right-circle-fill"></i>
+        </div>
+    </section> -->
+
+
+    <!-- testimonial -->
+    <!-- <section class="testimonial">
+        <h1>What Our Customers Say About Us</h1>
+        
+        <div class="row">
+            <div class="testimonial_col">
+                <img src="images/customer1.jpg" alt="">
+                <i class="bi bi-quote" style="font-size: 26px"></i>
+                <div>
+                    <p>This travel website made my trip planning a breeze! The interface was user-friendly and I was able to easily compare prices and options for flights, hotels, and activities. I ended up booking everything through this site and had an amazing vacation.</p>
+                    <h3>Andrew Williams</h3>
+                    <p class="city">New York, USA</p>
+                </div>
+            </div>
+            <div class="testimonial_col">
+                <i class="bi bi-quote" style="font-size: 26px"></i>
+                <img src="images/customer2.jpg" alt="">
+                <div>
+                    <p>I love this travel website! They offer a wide range of destinations and the customer service is exceptional. Whenever I had a question or concern, their team was quick to respond and provide helpful advice. I highly recommend this site for anyone planning their next adventure.</p>
+                    <h3>Olivia Rodriguez</h3>
+                    <p class="city">Barcelona, Spain</p>
+                </div>
+            </div>
+            <div class="testimonial_col">
+                <i class="bi bi-quote" style="font-size: 26px"></i>
+                <img src="images/customer3.jpg" alt="">
+                <div>
+                    <p>This travel website helped me find the perfect accommodations for my trip. I was able to filter my search based on my preferences and budget, and the results were spot-on. The hotel I ended up booking exceeded my expectations and made my trip even more enjoyable.</p>
+                    <h3>Ethan Lee</h3>
+                    <p class="city">Sydney, Australia</p>
+                </div>
+            </div>
+            <div class="testimonial_col">
+                <i class="bi bi-quote" style="font-size: 26px"></i>
+                <img src="images/customer4.jpg" alt="">
+                <div>
+                    <p>Thanks to this travel website, I was able to book a last-minute getaway at an affordable price. The site offered great deals on flights and hotels, and I was able to find a package that fit my schedule and budget perfectly. I had a fantastic time on my trip and will definitely use this site again in the future.</p>
+                    <h3>Arai Patel</h3>
+                    <p class="city">New Delhi, India</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- footer -->
+    <section class="footer">
+        <div class="row">
+            <div class="logo">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo_final.png') }}" alt=""></a>
+                <p>Ease Your Journey <br> Use Journify </p>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+            <div class="footer_col">
+                <h2 class="top">Company</h2>
+                <a href="">About Us</a>
+                <a href="">Destinations</a>
+                <a href="">Packages</a>
+                <a href="">Contacts</a>
+            </div>
+            <div class="footer_col">
+                <h2 class="top">Help</h2>
+                <a href="">Help/FAQ's</a>
+                <a href="">Cancel Flight</a>
+                <a href="">Press</a>
+                <a href="">Contacts</a>
+            </div>
+            <div class="footer_col">
+                <h2 class="top">More</h2>
+                <a href="">Domestic Flights</a>
+                <a href="">Investor Relations</a>
+                <a href="">Partnerships</a>
+                <a href="">Jobs</a>
+            </div>
+            <div class="footer_col">
+                <h2 class="top">Terms</h2>
+                <a href="">Privacy Policy</a>
+                <a href="">Terms of Use</a>
+                <a href="">Accessibility</a>
+                <a href="">Contacts</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        let submenu = document.getElementById("submenu");
+
+        function togglemenu(){
+            submenu.classList.toggle("open_menu"); 
+        }
+
+        const originSearchBox = document.getElementById('origin-search-box');
+        const originResultsContainer = document.getElementById('origin-search-results');
+        const destinationSearchBox = document.getElementById('destination-search-box');
+        const destinationResultsContainer = document.getElementById('destination-search-results');
+    
+        originSearchBox.addEventListener('input', function() {
+            const query = this.value;
+    
+            if (query.length > 0) {
+                fetch('/search_flight_origin?q=' + query)
+                    .then(response => response.json())
+                    .then(results => {
+                        if (results.length > 0) {
+                            originResultsContainer.innerHTML = '';
+                            results.forEach(result => {
+                                const option = document.createElement('div');
+                                option.innerText = result;
+                                option.addEventListener('click', function() {
+                                    originSearchBox.value = this.innerText;
+                                    originResultsContainer.innerHTML = '';
+                                });
+                                originResultsContainer.appendChild(option);
+                            });
+                        } else {
+                            originResultsContainer.innerHTML = 'No results found';
+                        }
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                originResultsContainer.innerHTML = '';
+            }
+        });
+    
+        destinationSearchBox.addEventListener('input', function() {
+            const query = this.value;
+    
+            if (query.length > 0) {
+                fetch('/search_flight_destination?q=' + query)
+                    .then(response => response.json())
+                    .then(results => {
+                        if (results.length > 0) {
+                            destinationResultsContainer.innerHTML = '';
+                            results.forEach(result => {
+                                const option = document.createElement('div');
+                                option.innerText = result;
+                                option.addEventListener('click', function() {
+                                    destinationSearchBox.value = this.innerText
+                                    destinationResultsContainer.innerHTML = '';
+                        });
+                        destinationResultsContainer.appendChild(option);
+                    });
+                } else {
+                    destinationResultsContainer.innerHTML = 'No results found';
+                }
+            })
+            .catch(error => console.error(error));
+    } else {
+        destinationResultsContainer.innerHTML = '';
+    }
+});
+    </script>
+
+
+
+</body>
+</html>

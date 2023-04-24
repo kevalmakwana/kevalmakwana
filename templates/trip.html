@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Bookings</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         /* Style the table */
+         table {
+          border-collapse: collapse;
+          width: 100%;
+          color: #333;
+          font-size: 14px;
+          text-align: left;
+        }
+      
+        /* Style the table header */
+        th {
+          background-color: #4CAF50;
+          color: white;
+          font-weight: bold;
+          padding: 10px;
+          text-align: center;
+          vertical-align: middle;
+        }
+      
+        /* Style the table body */
+        td {
+          text-align: center;  
+          border: 1px solid #ddd;
+          padding: 10px;
+          vertical-align: middle;
+        }
+      
+        /* Alternate row color */
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      
+        /* Hover effect */
+        tr:hover {
+          background-color: #ddd;
+        }
+
+        .centered-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f1f1f1;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      .top-right {
+        position:absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .top-right p {
+        background-color: white;
+        padding: 5px;
+      }
+      </style>
+</head>
+<body>
+    <div class="top-right">
+        <p>Welcome, {{ username }}</p>
+    </div>
+    <h1>Your Bookings</h1>
+    <div>
+      <button onclick="window.history.back()">Back</button>
+      <button onclick="location.reload()">Refresh</button>
+    </div>
+    <p>Select an option to view your bookings:</p>
+    <form>
+        <label><input type="radio" name="option" value="flight" {% if selected_option == 'flight' %}checked{% endif %}>Show Flight Bookings</label><br>
+        <label><input type="radio" name="option" value="train" {% if selected_option == 'train' %}checked{% endif %}>Show Train Bookings</label><br>
+        <input type="submit" value="Submit">
+    </form>
+    <h2>Your {{ selected_option.capitalize() }} Bookings:</h2>
+    {% if bookings %}
+        <table>
+            <thead>
+                <th>Booking ID</th>
+                <th>{{ selected_option.capitalize() }} Number</th>
+                {% if selected_option == 'flight' %}
+                <th>Airline</th>
+                {% else %}
+                <th>{{ selected_option.capitalize() }} Name</th>
+                {% endif %}
+                <th>Origin</th>
+                <th>Destination</th>
+                {% if selected_option == 'flight' %}
+                <th>Scheduled Departure</th>
+                <th>Scheduled Arrival</th>
+                {% else %}
+                <th>Day</th>
+                {% endif %}
+                <th>Travel Date</th>
+                <th>Status of Journey</th>
+            </thead>
+            {% for booking in bookings %}
+            <tbody>
+                <tr>
+                    <td>{{ booking[2] }}</td> 
+                    <td>{{ booking[3] }}</td> 
+                    <td>{{ booking[4] }}</td> 
+                    <td>{{ booking[5] }}</td> 
+                    <td>{{ booking[6] }}</td> 
+                    {% if selected_option == 'flight' %}
+                    <td>{{ booking[7] }}</td>
+                    <td>{{ booking[8] }}</td>
+                    <td>{{ booking[9] }}</td>
+                    <td>{{ booking[10] }}</td>
+                    {% else %}
+                    <td>{{ booking[7] }}</td>
+                    <td>{{ booking[8] }}</td>
+                    <td>{{ booking[9] }}</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    {% else %}
+    <div class="centered-message">
+        <p>No bookings found.</p>
+    </div>
+    {% endif %}
+
+    <script>
+        function showFlights() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("bookings").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/getFlights", true);
+            xhttp.send();
+        }
+        
+        function showTrains() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("bookings").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/getTrains", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>

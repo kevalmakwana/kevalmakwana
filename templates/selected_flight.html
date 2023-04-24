@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Selected Flight</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p>Welcome, {{ username }}</p>
+    <h1>Please review your flight:</h1>
+    <p>Flight Number: {{ flight_no }}</p>
+    <p>Airline: {{ airline }} </p>
+    <p>Origin: {{ origin }} </p>
+    <p>Destination: {{ destination }} </p>
+    <p>Departure Date: {{ dep_date }}</p>
+    <p>Scheduled Departure: {{ dep_time }}</p>
+    <p>Scheduled Arrival: {{ arr_time }} </p>
+    <p>Duration: {{ duration.seconds // 3600 }} hours, {{ (duration.seconds % 3600) // 60 }} minutes </p>
+
+    <form action="{{ url_for('book_flight_ticket') }}" method="post">
+        <input type="hidden" name="flight_no" value="{{ flight_no }}">
+        <input type="hidden" name="airline" value="{{ airline }}">
+        <input type="hidden" name="origin" value="{{ origin }}">
+        <input type="hidden" name="destination" value="{{ destination }}">
+        <input type="hidden" name="dep_time" value="{{ dep_time }}">
+        <input type="hidden" name="arr_time" value="{{ arr_time }}">
+        <input type="hidden" name="dep_date" value="{{ dep_date }}">
+        <input type="hidden" name="duration" value="{{ duration }}">
+        <button type="submit">Review and Book Flight</button>
+    </form>
+
+    <button onclick="goBack()">Back</button>
+</body>
+
+<script>
+    function goBack()
+    {
+      window.history.back()
+    }
+  </script>
+
+</html>

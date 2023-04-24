@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Merriweather&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: 'Merriweather', serif;
+			color: #272444; /* dark blue */
+			margin: 135px 0;
+			padding: 0;
+			background-image: linear-gradient(rgba(158, 218, 173, 0.7),rgba(107, 164, 185, 0.7)),url("../static/img/bg.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+
+		h1 {
+			text-align: center;
+			color: #052644; /* dark blue */
+			font-family: 'Montserrat', sans-serif;
+			font-weight: bold;
+			margin-top: 40px;
+		}
+
+		form {
+			width: 500px;
+			margin: 0 auto;
+			background-color: rgba(255, 248, 239, 0.6); /* transparent white */
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* shadow */
+			font-family: 'Montserrat', sans-serif;
+			color: #272444; /* dark blue */
+		}
+
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 10px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			font-family: 'Merriweather', serif;
+			color: #272444; /* dark blue */
+		}
+
+		button {
+			background-color: #3DB3AD; /* green */
+			color: white;
+			padding: 14px 20px;
+			margin: 15px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: 100%;
+			font-family: 'Montserrat', sans-serif;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 16px;
+		}
+
+		button:hover {
+			background-color: #2E8B89; /* darker green on hover */
+		}
+
+		.container {
+			padding: 16px;
+		}
+	</style>
+</head>
+<body>
+	<h1 style="font-size: 36px;">Sign In</h1>
+	<form action="{{ url_for('login') }}" method="post">
+		<div class="container">
+			{% with messages = get_flashed_messages() %}
+            {% if messages %}
+				<div class="flash">
+					{% for message in messages %}
+                	{{ message }}
+                	{% endfor %}
+				</div>
+            {% endif %}
+    		{% endwith %}
+			<label for="email"><b>Email</b></label>
+			<input type="text" placeholder="Enter Email" name="email" required>
+
+			<label for="password"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" required>
+
+			<button type="submit">Sign In</button>
+            <p>Forgot password <a href="#"> Click Here! </a> </p>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University website design</title>
+    <link rel="stylesheet" href="rough.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet"> 
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="eduford_img/logo.png" alt=""></a>
+            <div class="nav_links" id="navlinks">
+                <!-- <i class="fa fa-times"></i> -->
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">ABOUT</a></li>
+                    <li><a href="">COURSE</a></li>
+                    <li><a href="">BLOG</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+            <!-- <i class="fa fa-bars"></i> -->
+        </div>
+        <i class="bi bi-list" onclick="showMenu()"></i>
+    </nav>
+        <div class="text_box">
+            <h1>Worlds biggest university</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem voluptate quasi aspernatur voluptas? Porro dolor necessitatibus id. Vitae deserunt incidunt labore inventore, natus esse repudiandae praesentium, quidem, distinctio delectus quo!
+            </p>
+            <a href="" class="hero_btn">Visit us to know more</a>
+        </div>
+    </section> 
+    <script>
+        var navlinks = document.getElementById("navlinks");
+
+        function showMenu(){
+            navlinks.style.right="0";
+        }
+        function hideMenu(){
+            navlinks.style.right="-200px";
+        }
+    </script>
+
+    <!-- courses -->
+    <section class="course">
+        <h1>Courses we offer</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus repellendus ad totam a ea aliquid asperiores illo architecto. Aut, repudiandae dolore esse alias voluptatem ab voluptatibus dicta unde. Explicabo, quia.
+        </p>
+        <div class="row">
+            <div class="course_col">
+                <h3>Intermediate</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, natus. Sunt maiores earum sapiente iusto incidunt, neque dignissimos ipsum. Earum aliquid voluptatibus assumenda placeat ullam dolores ipsum ab ad quis?</p>
+            </div>
+            <div class="course_col">
+                <h3>Degree</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, natus. Sunt maiores earum sapiente iusto incidunt, neque dignissimos ipsum. Earum aliquid voluptatibus assumenda placeat ullam dolores ipsum ab ad quis?</p>
+            </div>
+            <div class="course_col">
+                <h3>Graduation</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, natus. Sunt maiores earum sapiente iusto incidunt, neque dignissimos ipsum. Earum aliquid voluptatibus assumenda placeat ullam dolores ipsum ab ad quis?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- campus -->
+    <section class="campus">
+        <h3>Our Campus</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dignissimos repudiandae fugiat repellat cum saepe.</p>
+        <div class="row">
+            <div class="campus_col">
+                <img src="eduford_img/london.png" alt="">
+                <div class="layer">
+                    <h3>LONDON</h3>
+                </div>
+            </div>
+            <div class="campus_col">
+                <img src="eduford_img/washington.png" alt="">
+                <div class="layer">
+                    <h3>WASHINGTON</h3>
+                </div>
+            </div>
+            <div class="campus_col">
+                <img src="eduford_img/newyork.png" alt="">
+                <div class="layer">
+                    <h3>NEWYORK</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- facilities -->
+    <section class="facility">
+        <h1>Our Facilities</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, ducimus.
+        </p>
+
+        <div class="row">
+            <div class="facility_col">
+                <img src="eduford_img/library.png" alt="">
+                <h3>World Class Library</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, cumque!</p>
+            </div>
+            <div class="facility_col">
+                <img src="eduford_img/basketball.png" alt="">
+                <h3>Largest Play Ground</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, cumque!</p>
+            </div>
+            <div class="facility_col">
+                <img src="eduford_img/cafeteria.png" alt="">
+                <h3>Tasty and Healthy Food</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, cumque!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- testimonials -->
+
+    <section class="testimonial">
+        <h1>What Our Student Say</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo consequuntur debitis nobis! Ullam libero quisquam non itaque, soluta porro voluptate ea perspiciatis quas corrupti maiores obcaecati quibusdam aspernatur! Nulla, molestias.</p>
+        
+        <div class="row">
+            <div class="testimonial_col">
+                <img src="eduford_img/user1.jpg" alt="">
+                <div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum, id minima necessitatibus ex reprehenderit consectetur iste ad atque, sint, aliquid vitae iure ullam eveniet veritatis quibusdam animi. Maxime hic reiciendis, optio in quia ad!</p>
+                    <h3>Christine Berkley</h3>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+            </div>
+            <div class="testimonial_col">
+                <img src="eduford_img/user2.jpg" alt="">
+                <div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi illum, id minima necessitatibus ex reprehenderit consectetur iste ad atque, sint, aliquid vitae iure ullam eveniet veritatis quibusdam animi. Maxime hic reiciendis, optio in quia ad!</p>
+                    <h3>David Harber</h3>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- call to action -->
+
+    <section class="cta">
+        <h1>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.<br> Aliquid ipsa eos saepe, odio error doloremque.
+        </h1>
+        <a href="" class="hero_btn">CONTACT US</a>
+    </section>
+
+    <!-- footer -->
+
+    <section class="footer">
+        <h4>About Us</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, explicabo repudiandae<br> veritatis optio dolorem ducimus minus veniam eaque ea amet. Natus, impedit? Quos voluptas dicta fugit beatae fuga quibusdam consectetur!</p>
+        <div class="icon">
+            <i class="bi bi-meta"></i>
+            <i class="bi bi-twitter"></i>
+            <i class="bi bi-instagram"></i>
+            <i class="bi bi-linkedin"></i>
+        </div>
+        <p>Made with <i class="bi bi-heart-fill"></i> by Shivam Kumar </p>
+    </section>
+</body>
+</html> 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+</head>
+<body>
+    <div class="container">
+        <div class="form_box">
+            <h1 id="title">Sign Up</h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('signup') }}" method="POST">
+                <div class="input_group">
+                    <div class="input_field" id="namefield">
+                        <i class="bi bi-person-circle"></i>
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="input_field">
+                        <i class="bi bi-envelope"></i>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="input_field">
+                        <i class="bi bi-key-fill"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <p>Forgot password <a href="#"> Click Here! </a> </p>
+                </div>
+                <div class="btn_field">
+                    <button type="submit" id="signupbtn">Sign Up</button>
+                    <button type="button" id="signinbtn" class="disabled">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+    let signupbtn=document.getElementById("signupbtn");
+    let signinbtn =document.getElementById("signinbtn");
+    let namefield =document.getElementById("namefield");
+    let title=document.getElementById("title");
+
+
+    signinbtn.onclick= function() {
+        namefield.style.maxHeight="0";
+        title.innerHTML="Sign In";
+        signupbtn.classList.add("active");
+        signupbtn.classList.remove("disable");
+    }
+
+    signupbtn.onclick= function(){
+        namefield.style.maxHeight="60px";
+        title.innerHTML="Sign Up";
+        signupbtn.classList.remove("disable");
+        signupbtn.classList.add("disable");
+    }
+    
+</script>
+</body>
+</html>

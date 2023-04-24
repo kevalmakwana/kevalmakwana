@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         /* Style the table */
+         table {
+          border-collapse: collapse;
+          width: 100%;
+          color: #333;
+          font-size: 14px;
+          text-align: left;
+        }
+      
+        /* Style the table header */
+        th {
+          background-color: #4CAF50;
+          color: white;
+          font-weight: bold;
+          padding: 10px;
+          text-align: center;
+          vertical-align: middle;
+          
+        }
+      
+        /* Style the table body */
+        td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          vertical-align: middle;
+        }
+      
+        /* Alternate row color */
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      
+        /* Hover effect */
+        tr:hover {
+          background-color: #ddd;
+        }
+
+        .centered-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f1f1f1;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+      form {
+        display: inline-block;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      .top-right {
+        position:absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .top-right p {
+        background-color: white;
+        padding: 5px;
+      }
+      </style>
+    <title>Search Results</title>
+</head>
+<body>
+    <div class="top-right">
+      <p>Welcome, {{ username }}</p>
+    </div>
+    <h1>Search Results</h1>
+    <button onclick="window.history.back()">Back</button>
+    <button onclick="location.reload()">Refresh</button>
+    <h2>Departure Date: {{ dep_date }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Airline</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Scheduled Departure</th>
+                <th>Scheduled Arrival</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        {% if results %}
+        {% for result in results %}
+        <tbody>
+            <tr>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+                <td>{{ result[3] }}</td>
+                <td>{{ result[5] }}</td>
+                <td>{{ result[6] }}</td>
+                <td>
+                  <form action="{{ url_for('select_flight') }}" method="post">
+                    <input type="hidden" name="flight_no" value="{{ result[1] }}">
+                    <input type="hidden" name="airline" value="{{ result[0] }}">
+                    <input type="hidden" name="origin" value="{{ result[2] }}">
+                    <input type="hidden" name="destination" value="{{ result[3] }}">
+                    <input type="hidden" name="dep_time" value="{{ result[5] }}">
+                    <input type="hidden" name="arr_time" value="{{ result[6] }}">
+                    <input type="hidden" name="dep_date" value="{{ dep_date }}">
+                    <button type="submit">Book Flight</button>
+                  </form>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+        {% else %}
+        <div class="centered-message">
+          <h1>No flights found for the desired origin and destination.</h1>
+        </div>
+        {% endif %}
+    </table>
+</body>
+
+
+</html>

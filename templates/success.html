@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Booking Confirmation</title>
+	<style>
+		body {
+			background-color: #F7F7F7;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			background-color: #FFFFFF;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+			margin: 50px auto;
+			max-width: 600px;
+			padding: 20px;
+			text-align: center;
+		}
+
+		h1 {
+			color: #005A9C;
+			font-size: 32px;
+			margin-bottom: 20px;
+		}
+
+		p {
+			font-size: 18px;
+			margin-bottom: 20px;
+		}
+
+		button {
+			background-color: #005A9C;
+			border: none;
+			border-radius: 5px;
+			color: #FFFFFF;
+			cursor: pointer;
+			font-size: 18px;
+			padding: 10px 20px;
+			transition: background-color 0.3s ease;
+		}
+
+		button:hover {
+			background-color: #003F6E;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Booking Confirmed!</h1>
+		<p>Thank you for booking with Journify. Your booking has been confirmed and the details have been sent to your email address.</p>
+		<button onclick="window.location.href='{{ url_for('home') }}'">Back to Home</button>
+	</div>
+</body>
+</html>

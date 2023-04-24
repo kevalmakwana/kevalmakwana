@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flight Search Results</title>
+    <style>
+    
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+      }
+
+      header h1 {
+        margin: 0;
+      }
+
+      main {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .flight-results {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+      .flight-result {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .flight-info {
+        width: 70%;
+      }
+
+      .flight-book {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #555;
+      }
+
+      .centered-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f1f1f1;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome, {{ username }}</h1>
+    </header>
+    <h1>Search Results</h1>
+    <button onclick="window.history.back()">Back</button>
+    <button onclick="location.reload()">Refresh</button>
+    <h2>Departure Date: {{ dep_date }}</h2>
+    <main>
+      <section class="flight-results">
+        <img src="{{ url_for('static', filename='img/img.jpg') }}" alt="Flight Results Image" width="100%">
+        <div class="flight-result">
+          <div class="flight-info">
+            {% if results %}
+            {% for result in results %}
+              <p>Flight Number: {{ result[0] }}</p>
+              <p>Airline: {{ result[1] }}</p>
+              <p>Origin Airport: {{ result[2] }}</p>
+              <p>Destination Airport: {{ result[3] }}</p>
+              <p>Scheduled Departure: {{ result[5] }}</p>
+              <p>Scheduled Arrival: {{ result[6] }}</p>
+              <div class="flight-book">
+                <form action="{{ url_for('select_flight') }}" method="post">
+                  <input type="hidden" name="flight_no" value="{{ result[0] }}">
+                  <input type="hidden" name="airline" value="{{ result[1] }}">
+                  <input type="hidden" name="origin" value="{{ result[2] }}">
+                  <input type="hidden" name="destination" value="{{ result[3] }}">
+                  <input type="hidden" name="dep_time" value="{{ result[5] }}">
+                  <input type="hidden" name="arr_time" value="{{ result[6] }}">
+                  <input type="hidden" name="dep_date" value="{{ dep_date }}">
+                  <button type="submit">Book Flight</button>
+                </form>
+              </div>
+            {% endfor%}
+
+            {% else %}
+            <div class="centered-message">
+              <h1>No flights found for the desired origin and destination.</h1>
+            </div>
+
+
+          {% endif%}
+          </div>
+      </section>
+    </main>
+
+  </body>
+</html>

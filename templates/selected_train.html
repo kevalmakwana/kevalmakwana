@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Selected Train</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p>Welcome, {{ username }}</p>
+    <h1>Please review your Train:</h1>
+    <p>Train Number: {{ train_no }}</p>
+    <p>Train Name: {{ train_name }} </p>
+    <p>Source Station: {{ origin }} </p>
+    <p>Destination Station: {{ destination }} </p>
+    <p>Travel Date: {{ display_date }}</p>
+    <p>Travel Day: {{ day_of_week }}</p>
+
+    <form action="{{ url_for('book_train_ticket') }}" method="post">
+        <input type="hidden" name="train_no" value="{{ train_no }}">
+        <input type="hidden" name="train_name" value="{{ train_name }}">
+        <input type="hidden" name="origin" value="{{ origin }}">
+        <input type="hidden" name="destination" value="{{ destination }}">
+        <input type="hidden" name="day_of_week" value="{{ day_of_week }}">
+        <input type="hidden" name="travel_date" value="{{ travel_date }}">
+        <input type="hidden" name="display_date" value="{{ display_date }}">
+        <button type="submit">Book a Ticket</button>
+      </form>
+    <button onclick="goBack()">Back</button>
+</body>
+
+<script>
+    function goBack()
+    {
+      window.history.back()
+    }
+  </script>
+
+</html>
